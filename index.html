@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>任务清单</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="css/bootstrap.min14ed.css" rel="stylesheet">
+		<link href="css/font-awesome.min93e3.css" rel="stylesheet">
+		<link href="css/animate.min.css" rel="stylesheet">
+		<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+		<link href="css/style.min862f.css" rel="stylesheet">
+		<style type="text/css">
+			#main_table_head tr th{text-align: center;} 
+			#main_table{position: relative;}
+			#main_table tr td{width: 150px;text-align: center;position: relative;}
+			#main_table tr td .fa-times-circle{position: absolute;right: 3px; top: 3px;cursor: pointer;}
+		</style>
+	</head>
+
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content  animated fadeInRight">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ibox">
+						<div class="ibox-content" style="position: relative;z-index: 100000;">
+							<h3>姓名列表</h3>
+							<p class="small"><i class="fa fa-hand-o-up"></i> 把姓名拖动到任务面板</p>
+
+							<div class="input-group">
+								<input type="text" placeholder="输入姓名" id="add_ipt" class="input input-sm form-control">
+								<span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-white" id="add_btn"> <i class="fa fa-plus"></i> 添加</button>
+                                </span>
+							</div>
+
+							<ul class="sortable-list agile-list" id="name_wrap">
+								<li class="danger-element name_li">
+									小王
+									<a href="#" class="pull-right btn btn-xs btn-white delete" >删除</a>
+								</li>
+								<li class="danger-element name_li">
+									小潘
+									<a href="#" class="pull-right btn btn-xs btn-white delete" >删除</a>
+									
+								</li>
+								<li class="danger-element name_li">
+									小胡
+									<a href="#" class="pull-right btn btn-xs btn-white delete" >删除</a>
+								</li>
+								<li class="danger-element name_li">
+									小勒
+									<a href="#" class="pull-right btn btn-xs btn-white delete" >删除</a>
+									
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="ibox">
+						<div class="ibox-content">
+							<h3>任务面板</h3>
+                                <div class="mail-tools tooltip-demo m-b-sm">
+			                        <button class="btn btn-white btn-sm" id="add_tr" data-toggle="tooltip" data-placement="top" title="新增一排列表"><i class="fa fa-plus"></i> 新增</button>
+			                        <button class="btn btn-white btn-sm" id="del_tr" data-toggle="tooltip" data-placement="top" title="删除最后一个列表"><i class="fa fa-trash"> 删除</i></button>
+			                    </div>
+                                <table class="table table-bordered">
+		                            <thead id="main_table_head">
+		                                <tr>
+		                                    <th>日期</th>
+		                                    <th colspan="3">莫支</th>
+		                                    <th colspan="3">大桥头</th>
+		                                    <th colspan="3">西岙</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="main_table">
+		                                <tr >
+		                                    <td style="width: 150px;padding: 0;">
+					                           <div id="data_1">
+						                            <div class="input-group date" >
+						                                <input type="text" class="form-control input-group-addon" style="border: none;">
+						                            </div>
+						                        </div>
+		                                    </td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                </tr>
+		                                <tr>
+		                                    <td style="width: 150px;padding: 0;">
+					                           <div id="data_1">
+						                            <div class="input-group date" >
+						                                <input type="text" class="form-control input-group-addon" style="border: none;" >
+						                            </div>
+						                        </div>
+		                                    </td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                </tr>
+		                                <tr>
+		                                    <td style="width: 150px;padding: 0;">
+					                           <div id="data_1">
+						                            <div class="input-group date" >
+						                                <input type="text" class="form-control input-group-addon" style="border: none;">
+						                            </div>
+						                        </div>
+		                                    </td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                    <td></td>
+		                                </tr>
+		                            </tbody>
+		                        </table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/content.min.js"></script>
+		<script src="js/jquery-ui-1.10.4.min.js"></script>
+		<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    		<script src="js/plugins/cropper/cropper.min.js"></script>
+    		
+    		
+		<script>
+			$(document).ready(function  () {
+				//进入加载localstorage数据
+				var arrLocal=[];
+				window.localStorage.setItem("key","");
+				var arrLocalString=window.localStorage.getItem("key");
+				arrLocal=arrLocalString.split(",");
+				for(var i=0; i<arrLocal.length;i++){
+						if(arrLocal[i] !==""){
+						$("#name_wrap").append("<li class='danger-element name_li ui-draggable'>"+arrLocal[i]+"<a href='#' class='pull-right btn btn-xs btn-white delete' >删除</a></li>")
+					}
+				}
+				DatePicker();//日期选择函数
+				$("#main_table_head tr th").not("#main_table_head tr th:first-child").dblclick(function  () {
+					$(this).html("<input type='text' value='"+$(this).text()+"' />")
+				})
+				$(document).on("blur","#main_table_head tr th input",function  () {
+					$(this).parent().html($(this).val())
+				})
+				
+				
+				//	新增表格方法
+				$(document).on("click","#add_tr",function  () {
+					$("#main_table").append(create_tr())
+					DatePicker();
+					$( "#main_table tr td" ).droppable();
+				})
+				
+				//	删除表格方法
+				$(document).on("click","#del_tr",function  () {
+					$("#main_table tr:last-child").remove()
+				})
+				//	新增姓名方法
+				$(document).on("click","#add_btn",function  () {
+					var ipt_v=$("#add_ipt").val();
+					if(ipt_v!==""){
+						$("#name_wrap").append("<li class='danger-element name_li ui-draggable'>"+ipt_v+"<a href='#' class='pull-right btn btn-xs btn-white delete' >删除</a></li>")
+						LiDrag ();
+						$("#add_ipt").val("")
+						arrLocal.push(ipt_v)   //数据储存添加到本地的localStorage转化的arrLocal数组中
+						arrDataString=arrLocal.join(",")     //数组转化为字符串
+						window.localStorage.setItem("key", arrDataString); //转存到localStorage
+					}
+				})
+				//	删除姓名方法
+				$(document).on("click","#name_wrap .delete",function() {
+					$(this).parent().remove();
+					var del_string=$.trim($(this).parent().text().replace("删除",""))
+					var index = arrLocal.indexOf(del_string);
+					if (index > -1) {
+						arrLocal.splice(index, 1);
+					}
+					console.log(arrLocal)
+					arrDataString=arrLocal.join(",")
+					window.localStorage.setItem("key", arrDataString);
+				})
+				//删除td按钮hover方法
+				$( "#main_table tr td" ).not("#main_table tr td:first-child").hover(function () {
+					if($(this).html() !== ""){
+						$(this).append("<i class='fa fa-times-circle'></i>")
+					}
+				},function  () {
+					$(this).find(".fa-times-circle").remove()
+				})
+				//删除td按钮click方法
+				$(document).on("click","#main_table tr td .fa-times-circle",function  () {
+					var _this=$(this).parent()
+					var result=[]; //一个新的临时数组
+				    var n = [];//一个新的临时数组
+				    var arr=_this.parents("tr").find("td").not("#main_table tr td:first-child")
+		        		arr.each(function  () {
+		        			result.push(_this.text())
+		        		})
+		        		arr.css("color","#676a6c");
+		        		for(var i = 0; i <result.length; i++) {//遍历当前数组
+						//如果当前数组的第i已经保存进了临时数组，那么跳过，
+						//否则把当前项push到临时数组里面
+						if (n.indexOf(result[i]) == -1){
+							n.push(result[i]);
+						}else{
+							arr.each(function  () {
+				        			if(_this.text()==result[i]){
+				        				_this.css("color","red")
+				        			}
+				        		})
+						}
+					}
+					_this.html("")
+				})
+				
+				
+				//姓名块拖动方法
+				LiDrag ();
+				//姓名块放置方法
+				LiDrop ();
+				
+				
+			    
+			    
+			})
+			//姓名块拖动函数
+			function LiDrag () {
+				$("#name_wrap li").draggable({
+					containment: "document",
+					helper: "clone",
+					cursor: "move", 
+					cursorAt: { left:75,top:20 }
+				});
+			}
+			//姓名块放置函数
+			function LiDrop() {
+		        		$( "#main_table tr td" ).not("#main_table tr td:first-child").droppable({
+						accept: "#name_wrap li",
+						hoverClass: "ui-state-default",
+				      	drop: function( event, ui ) {
+				      		var result=[]; //一个新的临时数组
+				      		var n = [];//一个新的临时数组
+				        		$(this).html($.trim(ui.draggable.text().replace("删除",""))).css("color","#676a6c");
+				        		var arr=$( this ).parents("tr").find("td").not("#main_table tr td:first-child")
+				        		arr.each(function  () {
+				        			result.push($(this).text())
+				        		})
+				        		arr.css("color","#676a6c");
+							//重复比较
+							for(var i = 0; i <result.length; i++) {//遍历当前数组
+								//如果当前数组的第i已经保存进了临时数组，那么跳过，
+								//否则把当前项push到临时数组里面
+								if (n.indexOf(result[i]) == -1){
+									n.push(result[i]);
+								}else{
+									arr.each(function  () {
+						        			if($(this).text()==result[i]){
+						        				$(this).css("color","red")
+						        			}
+						        		})
+								}
+							}
+				       }
+				    })
+		        	}
+			//新增表格函数
+			function create_tr () {
+			    		var tr_html=''
+						tr_html+='<tr>'
+			            tr_html+='<td style="width: 150px;padding: 0;">'
+						tr_html+='<div id="data_1">'
+						tr_html+='<div class="input-group date" >'
+						tr_html+='<input type="text" class="form-control input-group-addon" style="border: none;">'
+						tr_html+='</div>'
+						tr_html+='</div>'
+			            tr_html+='</td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='<td></td>'
+			            tr_html+='</tr>'
+			            return tr_html
+			    }
+			//日期选择函数
+			function DatePicker() {
+				$("#data_1 .input-group.date").datepicker({ 
+						defaultDate : new Date(),
+						todayBtn: "linked", 
+						keyboardNavigation: !1, 
+						forceParse: !1, 
+						calendarWeeks: !0, 
+						autoclose: !0 
+					})
+			}
+		</script>
+	</body>
+
+</html>
